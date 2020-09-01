@@ -6,7 +6,7 @@ RUN apk update \
       && rm /etc/nginx/conf.d/default.conf
 
 RUN mkdir -p /var/www/html \
-      &&mkdir -p /run/nginx
+      && mkdir -p /run/nginx
 
 RUN chown -R nobody.nobody /var/www/html \
       && chown -R nobody:nobody /var/lib/nginx \
