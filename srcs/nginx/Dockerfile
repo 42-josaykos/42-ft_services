@@ -13,7 +13,7 @@ RUN echo "admin:admin" | chpasswd
 RUN ssh-keygen -A
 
 # Create auto-signed SSL certificates
-RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/certs/localhost.key -out /etc/ssl/certs/localhost.crt
+RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/selfsigned.key -out /etc/ssl/certs/selfsigned.crt
 
 # Create directory for index file and nginx's PID directory in /run
 RUN mkdir -p /var/www/html \
