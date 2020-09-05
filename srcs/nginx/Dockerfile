@@ -19,10 +19,10 @@ RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ss
 RUN mkdir -p /var/www/html \
       && mkdir -p /run/nginx
 
-# Permissions for nobody on directories
-RUN chown -R nobody.nobody /var/www/html \
-      && chown -R nobody:nobody /var/lib/nginx \
-      && chown -R nobody.nobody /run
+# Permissions for admin on directories
+RUN chown -R admin:admin /var/www/html \
+      && chown -R admin:admin /var/lib/nginx \
+      && chown -R admin:admin /run
 
 # Copy config files and start nginx and sshd daemons
 COPY nginx.conf /etc/nginx/nginx.conf
