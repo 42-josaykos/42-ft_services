@@ -24,10 +24,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /var/www/html/
 
 # Permissions for nginx user www-data
-RUN adduser -D www-data -G www-data
-RUN chown -R www-data:www-data /var/www/html \
-      && chown -R www-data:www-data /var/lib/nginx \
-      && chown -R www-data:www-data /run
+RUN chown -R admin:admin /var/www/html \
+      && chown -R admin:admin /var/lib/nginx \
+      && chown -R admin:admin /run
 
 # Start nginx
 COPY start.sh ./start.sh
