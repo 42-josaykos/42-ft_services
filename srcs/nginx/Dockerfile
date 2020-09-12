@@ -19,16 +19,21 @@ RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ss
 RUN mkdir -p /var/www/html \
       && mkdir -p /run/nginx
 
-# Permissions for admin on directories
-RUN chown -R admin:admin /var/www/html \
-      && chown -R admin:admin /var/lib/nginx \
-      && chown -R admin:admin /run
-
-# Copy config files and start nginx and sshd daemons
+# Copy config files
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /var/www/html/
+
+# Permissions for nginx user www-data
+RUN adduser -D www-data -G www-data
+RUN chown -R www-data:www-data /var/www/html \
+      && chown -R www-data:www-data /var/lib/nginx \
+      && chown -R www-data:www-data /run
+
+# Start nginx
 COPY start.sh ./start.sh
 CMD sh start.sh
 
 # Expose ports
-EXPOSE 80 443
+EXPOSE 80
+EXPOSE 443
+EXPOSE 22
