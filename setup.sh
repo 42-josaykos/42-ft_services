@@ -1,7 +1,6 @@
 #!/bin/sh
 
 minikube start --driver=docker
-minikube addons enable dashboard
 
 export CLUSTER_IP=$(minikube ip)
 echo "Cluster IP: ${CLUSTER_IP}"
