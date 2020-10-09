@@ -1,6 +1,6 @@
 FROM alpine:3.12
 LABEL Maintainer="Jonny Saykosy" \
-      Description="42 ft_services project: Nginx container based on Alpine Linux 3.12"
+      Description="42 ft_services: Nginx image based on Alpine Linux 3.12"
 
 # Install openrc to handle nginx and sshd (openssh) daemons
 RUN apk update \
