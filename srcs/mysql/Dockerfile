@@ -6,12 +6,15 @@ LABEL Maintainer="Jonny Saykosy" \
 VOLUME [ "/var/lib/mysql" ]
 
 RUN apk update \
-          && apk add --no-cache vim mysql mysql-client supervisor
+          && apk add --no-cache vim mysql mysql-client openrc
 
-RUN mkdir -p /run/supervisor
-COPY supervisord.conf /etc
 COPY init.sql .
 COPY start.sh .
 COPY my.cnf /etc/mysql/
 
+RUN chmod u+x start.sh
+
 EXPOSE 3306
+
+CMD ./start.sh
+

@@ -4,12 +4,13 @@ LABEL Maintainer="Jonny Saykosy" \
 
 # Install openrc to handle nginx and sshd (openssh) daemons
 RUN apk update \
-      && apk add --no-cache openrc nginx openssh openssl \
+      && apk add --no-cache openrc nginx openssh openssl sudo \
       && rm /etc/nginx/conf.d/default.conf
 
 # Create new user/password admin/admin and generate hostkeys for ssh
 RUN adduser -D admin
 RUN echo "admin:admin" | chpasswd
+RUN echo "admin ALL=(ALL) ALL" >> /etc/sudoers
 RUN ssh-keygen -A
 
 # Create auto-signed SSL certificates

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: ft_services/nginx
+          image: services/nginx
           imagePullPolicy: Never
 
 ---
