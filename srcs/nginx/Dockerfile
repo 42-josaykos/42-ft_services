@@ -2,15 +2,16 @@ FROM alpine:3.12
 LABEL Maintainer="Jonny Saykosy" \
       Description="42 ft_services: Nginx image based on Alpine Linux 3.12"
 
-# Install openrc to handle nginx and sshd (openssh) daemons
+# Install supervisor to handle nginx and sshd (openssh) daemons
 RUN apk update \
-      && apk add --no-cache openrc nginx openssh openssl sudo \
+      && apk add --no-cache supervisor nginx openssh openssl sudo \
       && rm /etc/nginx/conf.d/default.conf
 
 # Create new user/password admin/admin and generate hostkeys for ssh
 RUN adduser -D admin
 RUN echo "admin:admin" | chpasswd
 RUN echo "admin ALL=(ALL) ALL" >> /etc/sudoers
+RUN echo "Welcome into ft_services - Nginx container (by josaykos)" > /etc/motd
 RUN ssh-keygen -A
 
 # Create auto-signed SSL certificates
@@ -21,6 +22,7 @@ RUN mkdir -p /var/www/html \
       && mkdir -p /run/nginx
 
 # Copy config files
+COPY supervisord.conf /etc/supervisord.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /var/www/html/
 
@@ -29,11 +31,11 @@ RUN chown -R admin:admin /var/www/html \
       && chown -R admin:admin /var/lib/nginx \
       && chown -R admin:admin /run
 
-# Start nginx
-COPY start.sh ./start.sh
-CMD sh start.sh
-
 # Expose ports
 EXPOSE 80
 EXPOSE 443
 EXPOSE 22
+
+# Start nginx
+CMD supervisord -c /etc/supervisord.conf
+
