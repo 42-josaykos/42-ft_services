@@ -46,7 +46,6 @@ spec:
     app: mysql
   ports:
   - name: mysql
-    protocol: TCP
     port: 3306
 
 ---
@@ -61,5 +60,5 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 1Gi
 
