@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -19,14 +19,6 @@ spec:
       - name: nginx
         image: services/nginx
         imagePullPolicy: Never
-        livenessProbe:
-          exec:
-            command:
-            - /bin/sh
-            - -c
-            - ./liveness.sh
-          initialDelaySeconds: 20
-          periodSeconds: 20
         ports:
         - name: http
           containerPort: 80
