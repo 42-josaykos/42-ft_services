@@ -5,8 +5,8 @@ LABEL Maintainer="Jonny Saykosy" \
 
 VOLUME [ "/var/lib/mysql" ]
 
-RUN apk update \
-          && apk add --no-cache vim mysql mysql-client openrc
+RUN apk update
+RUN apk add --no-cache vim mysql mysql-client openrc
 
 COPY init.sql .
 COPY wordpress.sql .
