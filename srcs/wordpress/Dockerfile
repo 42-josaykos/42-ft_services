@@ -12,6 +12,7 @@ RUN tar -xvzf latest.tar.gz \
 
 RUN adduser -D -g 'www' www
 RUN mkdir -p /run/nginx
+COPY wp-config.php /wordpress
 RUN chown -R www:www /var/lib/nginx \
       && chown -R www:www /wordpress
 
