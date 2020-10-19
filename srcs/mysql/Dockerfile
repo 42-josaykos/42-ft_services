@@ -9,6 +9,7 @@ RUN apk update \
           && apk add --no-cache vim mysql mysql-client openrc
 
 COPY init.sql .
+COPY wordpress.sql .
 COPY start.sh .
 COPY my.cnf /etc/mysql/
 
