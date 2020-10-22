@@ -1,13 +1,11 @@
 #!/bin/sh
 
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
-
-./minikube start --driver=docker
+minikube start --driver=docker
 
 export CLUSTER_IP=$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)
 echo "Cluster IP: ${CLUSTER_IP}"
 
-eval $(./minikube docker-env)
+eval $(minikube docker-env)
 echo "Building nginx image..."
 docker build -t services/nginx srcs/nginx > /dev/null
 echo "Building mysql image..."
@@ -25,5 +23,5 @@ kubectl apply -f srcs/manifests/nginx.yaml > /dev/null
 kubectl apply -f srcs/manifests/mysql.yaml > /dev/null
 kubectl apply -f srcs/manifests/wordpress-deploy.yaml > /dev/null
 
-./minikube dashboard &
+minikube dashboard &
 echo "✅ ft_services deployment done"
