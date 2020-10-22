@@ -3,9 +3,9 @@ LABEL Maintainer="Jonny Saykosy" \
       Description="42 ft_services: Nginx image based on Alpine Linux 3.12"
 
 # Install supervisor to handle nginx and sshd (openssh) daemons
-RUN apk update \
-      && apk add --no-cache supervisor nginx openssh openssl sudo \
-      && rm /etc/nginx/conf.d/default.conf
+RUN apk update
+RUN apk add --no-cache supervisor nginx openssh openssl sudo
+RUN rm /etc/nginx/conf.d/default.conf
 
 # Create new user/password admin/admin and generate hostkeys for ssh
 RUN adduser -D admin
