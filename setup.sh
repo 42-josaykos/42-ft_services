@@ -1,6 +1,6 @@
 #!/bin/sh
 
-minikube start --driver=docker
+minikube start --vm-driver=docker
 
 export CLUSTER_IP=$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)
 echo "Cluster IP: ${CLUSTER_IP}"
