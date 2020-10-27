@@ -21,13 +21,6 @@ spec:
         ports:
         - name: http
           containerPort: 5050
-        volumeMounts:
-        - name: wordpress-data
-          mountPath: /wordpress
-      volumes:
-      - name: wordpress-data
-        persistentVolumeClaim:
-          claimName: wordpress-pv-claim
 ---
 
 apiVersion: v1
@@ -46,17 +39,3 @@ spec:
   - port: 5050
     protocol: TCP
     name: http
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: wordpress-pv-claim
-  labels:
-    app: wordpress
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
