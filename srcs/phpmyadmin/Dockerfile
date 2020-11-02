@@ -5,7 +5,11 @@ LABEL Maintainer="Jonny Saykosy" \
 RUN apk update
 RUN apk add --no-cache wget curl nginx gettext php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session php7-zip supervisor
 
-RUN mkdir -p /run/nginx &&  mkdir -p /www/tmp
+RUN mkdir -p /run/nginx \
+      && mkdir -p /www/tmp \
+      && mkdir -p /run/supervisor \
+      && mkdir -p /var/run/php \
+      && mkdir -p /var/log/php-fpm
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.1/phpMyAdmin-5.0.1-english.tar.gz
 RUN tar -xzf phpMyAdmin-5.0.1-english.tar.gz --strip-components=1 -C /www && chmod 777 /www/tmp
 RUN rm phpMyAdmin-5.0.1-english.tar.gz

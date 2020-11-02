@@ -5,7 +5,6 @@ LABEL Maintainer="Jonny Saykosy" \
 # Install supervisor to handle nginx and sshd (openssh) daemons
 RUN apk update
 RUN apk add --no-cache supervisor nginx openssh openssl sudo
-RUN rm /etc/nginx/conf.d/default.conf
 
 # Create new user/password admin/admin and generate hostkeys for ssh
 RUN adduser -D admin
@@ -19,7 +18,8 @@ RUN yes "" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ss
 
 # Create directory for index file and nginx's PID directory in /run
 RUN mkdir -p /var/www/html \
-      && mkdir -p /run/nginx
+      && mkdir -p /run/nginx \
+      && mkdir -p /run/supervisor
 
 # Copy config files
 COPY supervisord.conf /etc/supervisord.conf
@@ -32,9 +32,7 @@ RUN chown -R admin:admin /var/www/html \
       && chown -R admin:admin /run
 
 # Expose ports
-EXPOSE 80
-EXPOSE 443
-EXPOSE 22
+EXPOSE 80 443 22
 
 # Start nginx
 CMD supervisord -c /etc/supervisord.conf
