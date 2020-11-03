@@ -5,6 +5,10 @@ LABEL Maintainer="Jonny Saykosy" \
 # Install supervisor to handle nginx and sshd (openssh) daemons
 RUN apk update
 RUN apk add --no-cache supervisor nginx openssh openssl sudo
+RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
+
+RUN mkdir -p /etc/telegraf
+COPY telegraf.conf /etc/telegraf
 
 # Create new user/password admin/admin and generate hostkeys for ssh
 RUN adduser -D admin

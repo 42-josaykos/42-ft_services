@@ -4,6 +4,10 @@ LABEL Maintainer="Jonny Saykosy" \
 
 RUN apk update
 RUN apk add --no-cache wget curl nginx gettext php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session php7-zip supervisor
+RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
+
+RUN mkdir -p /etc/telegraf
+COPY telegraf.conf /etc/telegraf
 
 RUN mkdir -p /run/nginx \
       && mkdir -p /www/tmp \

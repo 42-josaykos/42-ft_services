@@ -7,6 +7,10 @@ VOLUME [ "/var/lib/mysql" ]
 
 RUN apk update
 RUN apk add --no-cache vim mysql mysql-client supervisor
+RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
+
+RUN mkdir -p /etc/telegraf
+COPY telegraf.conf /etc/telegraf
 
 COPY init.sql .
 COPY wordpress.sql .
