@@ -1,12 +1,9 @@
 #!bin/sh
 
-openrc default
-rc-update add mariadb default
-rc-service mariadb setup
-rc-service mariadb start
+mysql_install_db --user=mysql --ldata=/var/lib/mysql
 
-mysql -u root < init.sql
-mysql -u root wordpress < wordpress.sql
+mysqld_safe &
+sleep 5 && mysql -u root < init.sql && mysql -u root wordpress < wordpress.sql
+killall mysqld_safe
 
-rc-service mariadb stop
-mysqld_safe
+supervisord -c /etc/supervisord.conf
