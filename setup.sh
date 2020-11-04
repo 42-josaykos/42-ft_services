@@ -24,7 +24,7 @@ kubectl apply -f srcs/manifests/nginx.yaml > /dev/null
 kubectl apply -f srcs/manifests/mysql.yaml > /dev/null
 kubectl apply -f srcs/manifests/wordpress.yaml > /dev/null
 kubectl apply -f srcs/manifests/phpmyadmin.yaml > /dev/null
-#kubectl apply -f srcs/manifests/influxdb.yaml > /dev/null
+kubectl apply -f srcs/manifests/influxdb.yaml > /dev/null
 
 minikube dashboard &
 echo "✅ ft_services deployment done"
