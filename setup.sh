@@ -13,6 +13,8 @@ echo "Building phpmyadmin image..."
 docker build -t services/phpmyadmin srcs/phpmyadmin > /dev/null
 echo "Building influxdb image..."
 docker build -t services/influxdb srcs/influxdb > /dev/null
+echo "Building grafana image..."
+docker build -t services/grafana srcs/grafana > /dev/null
 
 echo "Applying manifests..."
 kubectl apply -f srcs/manifests/metallb-namespace.yaml > /dev/null
@@ -25,6 +27,7 @@ kubectl apply -f srcs/manifests/mysql.yaml > /dev/null
 kubectl apply -f srcs/manifests/wordpress.yaml > /dev/null
 kubectl apply -f srcs/manifests/phpmyadmin.yaml > /dev/null
 kubectl apply -f srcs/manifests/influxdb.yaml > /dev/null
+kubectl apply -f srcs/manifests/grafana.yaml > /dev/null
 
 minikube dashboard &
 echo "✅ ft_services deployment done"
