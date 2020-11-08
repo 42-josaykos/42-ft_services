@@ -12,11 +12,11 @@
 			}
 		]
 	},
-	"description": "Nginx container metrics",
+	"description": "Wordpress container metrics",
 	"editable": true,
 	"gnetId": null,
 	"graphTooltip": 0,
-	"id": 3,
+	"id": 1,
 	"links": [],
 	"panels": [
 		{
@@ -105,7 +105,7 @@
 						{
 							"key": "host",
 							"operator": "=",
-							"value": "nginx"
+							"value": "wordpress"
 						},
 						{
 							"condition": "AND",
@@ -242,7 +242,7 @@
 						{
 							"key": "host",
 							"operator": "=",
-							"value": "nginx"
+							"value": "wordpress"
 						},
 						{
 							"condition": "AND",
@@ -380,7 +380,7 @@
 						{
 							"key": "host",
 							"operator": "=",
-							"value": "nginx"
+							"value": "wordpress"
 						},
 						{
 							"condition": "AND",
@@ -458,7 +458,7 @@
 		]
 	},
 	"timezone": "",
-	"title": "Nginx",
-	"uid": "7juPxvnGz",
-	"version": 3
+	"title": "Wordpress",
+	"uid": "NiGGKDnMz",
+	"version": 1
 }

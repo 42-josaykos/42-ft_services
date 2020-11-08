@@ -12,7 +12,7 @@ RUN apk update && \
 COPY datasource.yaml /usr/share/grafana/conf/provisioning/datasources/
 RUN mkdir -p /usr/share/grafana/conf/provisioning/dashboards/ft_services
 COPY dashboards/*.json /usr/share/grafana/conf/provisioning/dashboards/ft_services/
-COPY dashboards/sample.yaml /usr/share/grafana/conf/provisioning/dashboards/
+COPY dashboards/dashboards.yaml /usr/share/grafana/conf/provisioning/dashboards/
 
 EXPOSE 3000
 
