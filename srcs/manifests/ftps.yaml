@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: default
+  labels:
+    app: ftps
+spec:
+  type: LoadBalancer
+  selector:
+    app: ftps
+  ports:
+  - name: ftp-server
+    protocol: TCP
+    port: 21
+  - name: ftp-data
+    protocol: TCP
+    port: 20
+  - name: ftp-pasv1
+    protocol: TCP
+    port: 30032
+  - name: ftp-pasv2
+    protocol: TCP
+    port: 30033
+  - name: ftp-pasv3
+    protocol: TCP
+    port: 30034
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps
+spec:
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: ftps
+        image: services/ftps
+        imagePullPolicy: Never
+        ports:
+        - name: ftp-server
+          containerPort: 21
+        - name: ftp-data
+          containerPort: 20
+        - name: ftp-pasv1
+          containerPort: 30032
+        - name: ftp-pasv2
+          containerPort: 30033
+        - name: ftp-pasv3
+          containerPort: 30034

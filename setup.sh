@@ -11,6 +11,8 @@ echo "Building wordpress image..."
 docker build -t services/wordpress srcs/wordpress > /dev/null
 echo "Building phpmyadmin image..."
 docker build -t services/phpmyadmin srcs/phpmyadmin > /dev/null
+echo "Building ftps server image..."
+docker build -t services/ftps srcs/ftps > /dev/null
 echo "Building influxdb image..."
 docker build -t services/influxdb srcs/influxdb > /dev/null
 echo "Building grafana image..."
@@ -26,6 +28,7 @@ kubectl apply -f srcs/manifests/nginx.yaml > /dev/null
 kubectl apply -f srcs/manifests/mysql.yaml > /dev/null
 kubectl apply -f srcs/manifests/wordpress.yaml > /dev/null
 kubectl apply -f srcs/manifests/phpmyadmin.yaml > /dev/null
+#kubectl apply -f srcs/manifests/ftps.yaml > /dev/null
 kubectl apply -f srcs/manifests/influxdb.yaml > /dev/null
 kubectl apply -f srcs/manifests/grafana.yaml > /dev/null
 
