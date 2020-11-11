@@ -21,5 +21,5 @@ RUN addgroup ftps
 RUN adduser admin -G ftps -h /home/admin -D
 RUN echo "admin:admin" | chpasswd
 
-EXPOSE 20 21 30032 30033 30034
+EXPOSE 20 21 30000
 CMD supervisord -c /etc/supervisord.conf

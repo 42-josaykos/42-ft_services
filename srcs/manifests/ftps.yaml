@@ -11,21 +11,15 @@ spec:
   selector:
     app: ftps
   ports:
-  - name: ftp-server
-    protocol: TCP
-    port: 21
   - name: ftp-data
     protocol: TCP
+    port: 21
+  - name: ftp-connection
+    protocol: TCP
     port: 20
-  - name: ftp-pasv1
+  - name: pftp-data-0
     protocol: TCP
-    port: 30032
-  - name: ftp-pasv2
-    protocol: TCP
-    port: 30033
-  - name: ftp-pasv3
-    protocol: TCP
-    port: 30034
+    port: 30000
 
 ---
 apiVersion: apps/v1
@@ -46,13 +40,6 @@ spec:
         image: services/ftps
         imagePullPolicy: Never
         ports:
-        - name: ftp-server
-          containerPort: 21
-        - name: ftp-data
-          containerPort: 20
-        - name: ftp-pasv1
-          containerPort: 30032
-        - name: ftp-pasv2
-          containerPort: 30033
-        - name: ftp-pasv3
-          containerPort: 30034
+        - containerPort: 21
+        - containerPort: 20
+        - containerPort: 30032
