@@ -6,9 +6,11 @@ LABEL Maintainer="Jonny Saykosy" \
 VOLUME [ "/var/lib/influxdb" ]
 
 RUN apk update
-RUN apk add --no-cache vim influxdb supervisor
+RUN apk add --no-cache influxdb supervisor
 RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
 
+COPY liveness.sh .
+RUN chmod u+x liveness.sh
 RUN mkdir -p /etc/telegraf
 COPY telegraf.conf /etc/telegraf
 

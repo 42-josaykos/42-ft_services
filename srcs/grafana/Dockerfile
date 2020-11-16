@@ -11,6 +11,8 @@ RUN apk update && \
 
 RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
 
+COPY liveness.sh .
+RUN chmod u+x liveness.sh
 RUN mkdir -p /etc/telegraf
 COPY telegraf.conf /etc/telegraf
 

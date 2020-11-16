@@ -20,6 +20,14 @@ spec:
       - name: mysql
         image: services/mysql
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - ./liveness.sh
+          initialDelaySeconds: 10
+          periodSeconds: 10
         securityContext:
           privileged: true
         ports:

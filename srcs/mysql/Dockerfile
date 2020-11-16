@@ -6,9 +6,11 @@ LABEL Maintainer="Jonny Saykosy" \
 VOLUME [ "/var/lib/mysql" ]
 
 RUN apk update
-RUN apk add --no-cache vim mysql mysql-client supervisor
+RUN apk add --no-cache mysql mysql-client supervisor
 RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
 
+COPY liveness.sh .
+RUN chmod u+x liveness.sh
 RUN mkdir -p /etc/telegraf
 COPY telegraf.conf /etc/telegraf
 

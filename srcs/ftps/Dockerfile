@@ -4,9 +4,11 @@ LABEL Maintainer="Jonny Saykosy" \
       Description="42 ft_services: FTPS server image based on Alpine Linux 3.12"
 
 RUN apk update
-RUN apk add --no-cache vim openssl openssh vsftpd supervisor
+RUN apk add --no-cache openssl openssh vsftpd supervisor
 RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
 
+COPY liveness.sh .
+RUN chmod u+x liveness.sh
 RUN mkdir -p /etc/telegraf
 COPY telegraf.conf /etc/telegraf
 

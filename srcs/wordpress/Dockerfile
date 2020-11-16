@@ -3,9 +3,11 @@ LABEL Maintainer="Jonny Saykosy" \
       Description="42 ft_services: Wordpress image based on Alpine Linux 3.12"
 
 RUN apk update
-RUN apk add --no-cache nginx vim curl  wget supervisor php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session
+RUN apk add --no-cache nginx curl  wget supervisor php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session
 RUN apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ telegraf
 
+COPY liveness.sh .
+RUN chmod u+x liveness.sh
 RUN mkdir -p /etc/telegraf
 COPY telegraf.conf /etc/telegraf
 
