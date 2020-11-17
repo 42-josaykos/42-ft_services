@@ -1,17 +1,11 @@
 #!/bin/bash
 
-function version { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
-
-MINIKUBE_VERSION=$(minikube version | grep version | cut -d " " -f3 | tr -d "v")
-
-if [ $(version $MINIKUBE_VERSION) -eq $(version "1.9.0") ]; then
-  echo "Minikube version is v1.9.0."
-else
-  echo "Your Minikube version is not v1.9.0 (like official 42 Xubuntu VM). Installing Minikube version v1.9.0..."
-  curl -LO https://storage.googleapis.com/minikube/releases/v1.9.0/minikube-linux-amd64
-  chmod +x minikube-linux-amd64
-  alias minikube=./minikube-linux-amd64
-fi
+CLUSTER_IP="$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)"
+echo "Minikube IP: $CLUSTER_IP"
+sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/manifests/metallb-config.yaml"
+sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/ftps/vsftpd.conf"
+sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/nginx/nginx.conf"
+sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/mysql/wordpress.sql"
 
 minikube start --vm-driver=docker
 
