@@ -20,7 +20,7 @@ $cfg['Servers'][$i]['password'] = 'admin';
 
 /* Directories for saving/loading files from server */
 $cfg['UploadDir'] = '';
-$cfg['PmaAbsoluteUri'] = '172.17.0.3:5000';
+$cfg['PmaAbsoluteUri'] = './';
 $cfg['SaveDir'] = '';
 
 $cfg['TempDir'] = 'tmp';
