@@ -7,6 +7,7 @@ echo "Minikube IP: $CLUSTER_IP"
 if [[ $CLUSTER_IP != "192.168.49.2" ]]; then
   sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/manifests/metallb-config.yaml"
   sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/ftps/vsftpd.conf"
+  sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/ftps/ssl_test.sh"
   sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/nginx/nginx.conf"
   sed -i "s/192.168.49.2/$CLUSTER_IP/g" "srcs/mysql/wordpress.sql"
 fi

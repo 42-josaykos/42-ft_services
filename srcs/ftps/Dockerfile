@@ -23,6 +23,7 @@ RUN addgroup ftps
 RUN adduser admin -G ftps -h /home/admin -D
 RUN echo "admin:admin" | chpasswd
 COPY hello42.txt /home/admin
+COPY ssl_test.sh /home/admin
 
 EXPOSE 20 21 30000
 CMD supervisord -c /etc/supervisord.conf
