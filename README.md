@@ -1,5 +1,5 @@
 # 42-ft_services
-SysAdmin / DevOps project: basic production environment with K8s
+SysAdmin / DevOps project: basic production environment with Kubernetes
 
 Tested with Minikube v1.15.0.
 Should work as long as `minikube ip` is mapped to `192.168.49.2` or change it in the following files:
